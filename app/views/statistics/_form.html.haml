@@ -1,0 +1,9 @@
+= bootstrap_form_tag url: statistics_path, method: 'get', layout: :horizontal do |f|
+  .row
+    .col-sm-4
+      = f.select :month, (1..12).to_a, label: "Month", prompt: 'Please select a month', selected: params[:month]
+    .col-sm-4
+      = f.collection_select :author, @users, :id, :name, label: "Author", prompt: 'Please select an author', selected: params[:author]
+    .col-sm-4
+      = f.submit "Search", class: "btn btn-primary"
+%br

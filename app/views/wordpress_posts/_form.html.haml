@@ -1,0 +1,36 @@
+= bootstrap_form_tag url: wordpress_posts_path, method: 'get', layout: :horizontal do |f|
+  .row
+    .col-sm-6
+      = f.text_field :title, label: "Title", placeholder: "Enter some part of the title", value: params[:title]
+    - if current_user.admin?
+      .col-sm-6
+        = f.collection_select :author, @users, :wordpress_user_id, :name, label: "Author", prompt: 'Please select an author', selected: params[:author]
+  .row
+    .col-sm-6
+      = f.text_field "created[from]", label: "Created", placeholder: "Created start date", :"data-provide"=> "datepicker", value: params.fetch(:created, {}).fetch(:from, '')
+    .col-sm-6
+      = f.text_field "created[to]", label: "Created", placeholder: "Created end date", :"data-provide"=> "datepicker", value: params.fetch(:created, {}).fetch(:to, '')
+  .row
+    .col-sm-6
+      = f.number_field "users[from]", label: "Users", placeholder: "Users from", value: params.fetch(:users, {}).fetch(:from, '')
+    .col-sm-6
+      = f.number_field "users[to]", label: "Users", placeholder: "Users to", value: params.fetch(:users, {}).fetch(:to, '')
+  .row
+    .col-sm-6
+      = f.number_field "page_views[from]", label: "Page Views", placeholder: "Page views from", value: params.fetch(:page_views, {}).fetch(:from, '')
+    .col-sm-6
+      = f.number_field "page_views[to]", label: "Page Views", placeholder: "Page views to", value: params.fetch(:page_views, {}).fetch(:to, '')
+  .row
+    .col-sm-6
+      = f.number_field "average_time_on_page[from]", label: "Time On Page", placeholder: "Average time on page from", value: params.fetch(:average_time_on_page, {}).fetch(:from, '')
+    .col-sm-6
+      = f.number_field "average_time_on_page[to]", label: "Time On Page", placeholder: "Average time on page to", value: params.fetch(:average_time_on_page, {}).fetch(:to, '')
+  .row
+    .col-sm-6
+      = f.collection_select :sort, @sort_fields, :to_s, :to_s, selected: params[:sort]
+    .col-sm-6
+      = f.collection_select :order, ["Desc", "Asc"], :downcase, :to_s, selected: params[:order]
+
+  .row.text-center
+    = f.submit "Filter", class: "btn btn-primary"
+%br

@@ -1,0 +1,11 @@
+%tr{class: table_row_parity(user_counter)}
+  %td.center
+    = user.name
+  %td.center
+    = previous ? user.previous_facebook_stats.impressions : user.current_facebook_stats.impressions
+  %td.center
+    = previous ? user.previous_facebook_stats.impressions_organic : user.current_facebook_stats.impressions_organic
+  %td.center
+    = previous ? user.previous_facebook_stats.impressions_paid : user.current_facebook_stats.impressions_paid
+  %td.center
+    = previous ? user.previous_facebook_stats.clicks : user.current_facebook_stats.clicks

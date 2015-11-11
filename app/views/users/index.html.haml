@@ -1,0 +1,22 @@
+= content_for :page_title do
+  Users
+
+
+= link_to new_user_path, class: 'btn btn-primary' do
+  %i.fa.fa-user-plus.fa-6
+  Add User
+%br
+%br
+.panel.panel-default
+  .panel-heading
+    Users
+  .panel-body
+    .dataTable_wrapper
+      %table#dataTables-example.table.table-striped.table-bordered.table-hover
+        %thead
+          %tr
+            %th Name
+            %th Actions
+        %tbody
+          = render partial: "user", collection: @users, as: :user
+    = render partial: "shared/pagination", locals: {collection: @users}

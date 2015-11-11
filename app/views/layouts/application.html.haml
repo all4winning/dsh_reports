@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title DshReports
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+%body
+  #wrapper
+    = render "shared/navigation"
+    #page-wrapper
+      .container-fluid
+        .row
+          .col-lg-12
+            %h1.page-header
+              = yield :page_title
+              = flash_messages
+            = yield
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true

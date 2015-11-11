@@ -11,6 +11,12 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require metis_menu.min
+//= require jquery.data_tables.min
+//= require data_tables.boostrap.min
+//= require sb_admin_2
+//= require delete_link
+//= require bootstrap-datepicker

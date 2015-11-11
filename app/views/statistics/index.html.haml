@@ -1,0 +1,35 @@
+= content_for :page_title do
+  Statistics
+
+= render "form"
+
+- if @user.present?
+  .panel.panel-default
+  .panel-heading
+    %h3
+      = I18n.l(Date.new(Date.current.year, params[:month].to_i, 1), format: :full_month)
+      Stats
+  .panel-body
+    .dataTable_wrapper
+      %table#dataTables-example.table.table-striped.table-bordered.table-hover
+        %thead
+          %tr
+            %th Name
+            %th Users
+            %th Page Views
+            %th Page Views Per User
+            %th Average Time On Page
+        %tbody
+          %tr{class: table_row_parity(1)}
+            %td.center
+              = @user.name
+            %td.center
+              = @user.wordpress_stats(Date.new(Date.current.year, params[:month].to_i, 1)).users
+            %td.center
+              = @user.wordpress_stats(Date.new(Date.current.year, params[:month].to_i, 1)).unique_page_views
+            %td.center
+              = @user.wordpress_stats(Date.new(Date.current.year, params[:month].to_i, 1)).page_views_per_user
+            %td.center
+              = @user.wordpress_stats(Date.new(Date.current.year, params[:month].to_i, 1)).average_time_on_page
+              seconds
+        

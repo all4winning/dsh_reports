@@ -1,0 +1,42 @@
+= content_for :page_title do
+  Facebook Posts
+%h3
+  = I18n.l(Date.today, format: :full_month)
+  Statistics
+.row
+  .col-sm-3
+    %b Impressions:
+    = current_user.current_facebook_stats.impressions
+  .col-sm-3
+    %b Organic impressions:
+    = current_user.current_facebook_stats.impressions_organic
+  .col-sm-3
+    %b Paid impressions:
+    = current_user.current_facebook_stats.impressions_paid
+  .col-sm-3
+    %b Clicks:
+    = current_user.current_facebook_stats.clicks
+%br
+%br
+
+= render "form"
+
+.panel.panel-default
+  .panel-heading
+    Facebook Posts
+  .panel-body
+    .dataTable_wrapper
+      %table#dataTables-example.table.table-striped.table-bordered.table-hover
+        %thead
+          %tr
+            %th Title
+            - if @current_user.admin?
+              %th Author
+            %th Date
+            %th Impressions
+            %th Organic Impressions
+            %th Paid Impressions
+            %th Clicks
+        %tbody
+          = render partial: "facebook_post", collection: @facebook_posts, as: :facebook_post
+    = render partial: "shared/pagination", locals: {collection: @facebook_posts}

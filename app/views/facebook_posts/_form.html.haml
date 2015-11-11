@@ -1,0 +1,31 @@
+= bootstrap_form_tag url: facebook_posts_path, method: 'get', layout: :horizontal do |f|
+  .row
+    .col-sm-6
+      = f.text_field :title, label: "Title", placeholder: "Enter some part of the title", value: params[:title]
+    - if current_user.admin?
+      .col-sm-6
+        = f.collection_select :author, @users, :uid, :name, label: "Author", prompt: 'Please select an author', selected: params[:author]
+  .row
+    .col-sm-6
+      = f.text_field "created[from]", label: "Created", placeholder: "Created start date", :"data-provide"=> "datepicker", value: params.fetch(:created, {}).fetch(:from, '')
+    .col-sm-6
+      = f.text_field "created[to]", label: "Created", placeholder: "Created end date", :"data-provide"=> "datepicker", value: params.fetch(:created, {}).fetch(:to, '')
+  .row
+    .col-sm-6
+      = f.number_field "impressions[from]", label: "Impressions", placeholder: "Impressions from", value: params.fetch(:impressions, {}).fetch(:from, '')
+    .col-sm-6
+      = f.number_field "impressions[to]", label: "Impressions", placeholder: "Impressions to", value: params.fetch(:impressions, {}).fetch(:to, '')
+  .row
+    .col-sm-6
+      = f.number_field "clicks[from]", label: "Clicks", placeholder: "Clicks from", value: params.fetch(:clicks, {}).fetch(:from, '')
+    .col-sm-6
+      = f.number_field "clicks[to]", label: "Clicks", placeholder: "Clicks to", value: params.fetch(:clicks, {}).fetch(:to, '')
+  .row
+    .col-sm-6
+      = f.collection_select :sort, @sort_fields, :to_s, :to_s, selected: params[:sort]
+    .col-sm-6
+      = f.collection_select :order, ["Desc", "Asc"], :downcase, :to_s, selected: params[:order]
+
+  .row.text-center
+    = f.submit "Filter", class: "btn btn-primary"
+%br

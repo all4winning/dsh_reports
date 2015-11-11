@@ -1,0 +1,9 @@
+= bootstrap_form_for(@user) do |f|
+  = f.text_field :first_name
+  = f.text_field :last_name
+  = f.email_field :facebook_email
+  = f.text_field :wordpress_user_id
+  = f.text_field :uid, label: 'Facebook user id'
+  = f.check_box :active
+  = f.check_box :admin
+  = f.submit "Save"

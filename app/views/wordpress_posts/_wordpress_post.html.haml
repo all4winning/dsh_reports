@@ -1,0 +1,20 @@
+%tr{class: table_row_parity(wordpress_post_counter)}
+  %td.center
+    - if wordpress_post.title.present?
+      = link_to wordpress_post.title, "http://dailysuperheroes.com/" + wordpress_post.name + "/" + wordpress_post.wordpress_id.to_s, target: "_blank"
+  - if @current_user.admin?
+    %td.center
+      = wordpress_post.user.try(:name)
+  %td.center
+    = I18n.l(wordpress_post.created_time)
+  %td.center
+    = wordpress_post.users
+  %td.center
+    = wordpress_post.unique_page_views
+  %td.center
+    = wordpress_post.page_views_per_user
+  %td.center
+    = wordpress_post.average_time_on_page
+    seconds
+  %td.center
+    = link_to wordpress_post.facebook_posts.count, facebook_posts_path(wordpress_post: wordpress_post.wordpress_id)

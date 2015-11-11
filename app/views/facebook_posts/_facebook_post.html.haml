@@ -1,0 +1,16 @@
+%tr{class: table_row_parity(facebook_post_counter)}
+  %td.center.facebook-post-name
+    = link_to facebook_post.name.present? ? facebook_post.name : "No name", "https://www.facebook.com/" + facebook_post.facebook_id, target: "_blank"
+  - if @current_user.admin?
+    %td.center
+      = facebook_post.user.try(:name)
+  %td.center.facebook-post-name
+    = I18n.l(facebook_post.created_time)
+  %td.center.facebook-post-name
+    = facebook_post.impressions_unique
+  %td.center
+    = facebook_post.impressions_organic_unique
+  %td.center
+    = facebook_post.impressions_paid_unique
+  %td.center
+    = facebook_post.consumptions_unique

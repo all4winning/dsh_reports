@@ -1,0 +1,13 @@
+%tr{class: table_row_parity(user_counter)}
+  %td.center
+    = user.name
+  %td.center
+    = previous ? user.previous_earnings_stats.facebook_posts_number : user.current_earnings_stats.facebook_posts_number
+  %td.center
+    = previous ? user.previous_earnings_stats.wordpress_posts_number : user.current_earnings_stats.wordpress_posts_number
+  %td.center
+    = previous ? user.previous_earnings_stats.average_earnings_per_wordpress_post : user.current_earnings_stats.average_earnings_per_wordpress_post
+    $
+  %td.center
+    = previous ? user.previous_earnings_stats.earnings : user.current_earnings_stats.earnings
+    $
