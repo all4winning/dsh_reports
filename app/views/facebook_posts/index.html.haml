@@ -1,23 +1,5 @@
 = content_for :page_title do
   Facebook Posts
-%h3
-  = I18n.l(Date.today, format: :full_month)
-  Statistics
-.row
-  .col-sm-3
-    %b Impressions:
-    = current_user.current_facebook_stats.impressions
-  .col-sm-3
-    %b Organic impressions:
-    = current_user.current_facebook_stats.impressions_organic
-  .col-sm-3
-    %b Paid impressions:
-    = current_user.current_facebook_stats.impressions_paid
-  .col-sm-3
-    %b Clicks:
-    = current_user.current_facebook_stats.clicks
-%br
-%br
 
 = render "form"
 

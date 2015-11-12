@@ -1,24 +1,5 @@
 = content_for :page_title do
   Wordpress Posts
-%h3
-  = I18n.l(Date.today, format: :full_month)
-  Statistics
-.row
-  .col-sm-3
-    %b Users:
-    = current_user.current_wordpress_stats.users
-  .col-sm-3
-    %b Page views:
-    = current_user.current_wordpress_stats.unique_page_views
-  .col-sm-3
-    %b Page views per user:
-    = current_user.current_wordpress_stats.page_views_per_user
-  .col-sm-3
-    %b Average time on page:
-    = current_user.current_wordpress_stats.average_time_on_page
-    seconds
-%br
-%br
 
 = render "form"
 
