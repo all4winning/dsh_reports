@@ -1,0 +1,38 @@
+= content_for :page_title do
+  Analytics
+
+= render "form"
+
+- if @post.present?
+  .panel.panel-default
+  .panel-heading
+    %h3
+      = params[:start_date].to_date
+      to
+      = params[:end_date].to_date
+      stats
+  .panel-body
+    .dataTable_wrapper
+      %table#dataTables-example.table.table-striped.table-bordered.table-hover
+        %thead
+          %tr
+            %th Name
+            %th Sessions
+            %th Page Views
+            %th Page Views Per Session
+            %th Average Time On Page
+        %tbody
+          %tr{class: table_row_parity(1)}
+            %td.center
+              - if @post.title.present?
+                = link_to @post.title, "http://dailysuperheroes.com/" + @post.name + "/" + @post.wordpress_id.to_s, target: "_blank"
+            %td.center
+              = @analytics.sessions
+            %td.center
+              = @analytics.unique_page_views
+            %td.center
+              = @analytics.page_views_per_session
+            %td.center
+              = @analytics.average_time_on_page
+              seconds
+

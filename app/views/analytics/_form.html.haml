@@ -1,0 +1,11 @@
+= bootstrap_form_tag url: analytics_path, method: 'get', layout: :horizontal do |f|
+  .row
+    .col-sm-3
+      = f.text_field "start_date", label: "Sart date", placeholder: "Select a start date", :"data-provide"=> "datepicker", value: params[:start_date]
+    .col-sm-3
+      = f.text_field "end_date", label: "End date", placeholder: "Select an end date", :"data-provide"=> "datepicker", value: params[:end_date]
+    .col-sm-3
+      = f.collection_select :post, @posts, :id, :title, label: "Posts", prompt: 'Please select a post', selected: params[:post]
+    .col-sm-3
+      = f.submit "Search", class: "btn btn-primary"
+%br

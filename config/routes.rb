@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   resources :facebook_posts, only: [:index]
   resources :wordpress_posts, only: [:index]
   resources :statistics, only: [:index]
+  resources :analytics, only: [:index]
 end
