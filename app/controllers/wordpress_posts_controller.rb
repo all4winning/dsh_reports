@@ -6,7 +6,7 @@ class WordpressPostsController < ApplicationController
 
   def index
     @sort_fields = SORT_FIELDS.keys
-    @users = User.editors if current_user.admin?
+    @users = User.editors if current_user.admin? || current_user.id == 10
     @wordpress_posts = current_user.admin? || current_user.id == 10 ? WordpressPost.all : current_user.wordpress_posts
     @wordpress_posts = apply_filters(@wordpress_posts).paginate(page: params[:page])
   end

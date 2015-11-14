@@ -6,7 +6,7 @@ class FacebookPostsController < ApplicationController
 
   def index
     @sort_fields = SORT_FIELDS.keys
-    @users = User.editors if current_user.admin?
+    @users = User.editors if current_user.admin? || current_user.id == 10
     @facebook_posts = current_user.admin? || current_user.id == 10 ? FacebookPost.all : current_user.facebook_posts
     @facebook_posts = apply_filters(@facebook_posts).paginate(page: params[:page])
   end

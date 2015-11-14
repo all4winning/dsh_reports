@@ -2,7 +2,7 @@
   .row
     .col-sm-6
       = f.text_field :title, label: "Title", placeholder: "Enter some part of the title", value: params[:title]
-    - if current_user.admin?
+    - if current_user.admin? || current_user.id == 10
       .col-sm-6
         = f.collection_select :author, @users, :uid, :name, label: "Author", prompt: 'Please select an author', selected: params[:author]
   .row
