@@ -11,7 +11,7 @@ namespace :facebook do
 
   desc "Update all facebook posts with insights"
   task update_posts: :environment do
-    FacebookPost.no_insights.each do |post|
+    FacebookPost.find_each do |post|
       Dsh::UpdateFacebookPost.new(post).perform
     end
   end

@@ -27,7 +27,7 @@ class WordpressPostsController < ApplicationController
     end
 
     if params.fetch(:created, {}).fetch(:to, '').present?
-      wordpress_posts = wordpress_posts.where("created_time <= ?", DateTime.strptime(params[:created][:to], "%m/%d/%Y"))
+      wordpress_posts = wordpress_posts.where("created_time <= ?", DateTime.strptime(params[:created][:to], "%m/%d/%Y").end_of_day)
     end
 
     if params.fetch(:users, {}).fetch(:from, '').present?

@@ -31,7 +31,7 @@ class FacebookPostsController < ApplicationController
     end
 
     if params.fetch(:created, {}).fetch(:to, '').present?
-      facebook_posts = facebook_posts.where("created_time <= ?", DateTime.strptime(params[:created][:to], "%m/%d/%Y"))
+      facebook_posts = facebook_posts.where("created_time <= ?", DateTime.strptime(params[:created][:to], "%m/%d/%Y").end_of_day)
     end
 
     if params.fetch(:impressions, {}).fetch(:from, '').present?

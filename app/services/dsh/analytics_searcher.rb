@@ -37,5 +37,10 @@ module Dsh
     def users
       wordpress_post_insights.present? ? wordpress_post_insights[5] : 0
     end
+
+    def page_views_per_user
+      return 0 if users.to_i == 0
+      (unique_page_views.to_i / users.to_f).round(2)
+    end
   end
 end

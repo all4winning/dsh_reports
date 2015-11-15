@@ -18,3 +18,6 @@
     seconds
   %td.center
     = link_to wordpress_post.facebook_posts.count, facebook_posts_path(wordpress_post: wordpress_post.wordpress_id)
+  %td.center
+    - if wordpress_post.facebook_posts.count > 0
+      = I18n.l(wordpress_post.facebook_posts.first.created_time)
