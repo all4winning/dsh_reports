@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_filter :authorize_user
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.order(:id).paginate(page: params[:page])
   end
 
   def new
@@ -59,7 +59,12 @@ class UsersController < ApplicationController
       :wordpress_user_id,
       :uid,
       :admin,
-      :active
+      :active,
+      :base_page_views_per_list,
+      :price_per_list,
+      :price_per_news,
+      :above_base_price,
+      :bellow_base_price
     )
   end
 end

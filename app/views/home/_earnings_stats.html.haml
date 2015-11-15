@@ -2,12 +2,15 @@
   %td.center
     = user.name
   %td.center
-    = previous ? user.previous_earnings_stats.facebook_posts_number : user.current_earnings_stats.facebook_posts_number
+    = previous ? user.previous_earnings_stats.posts_number : user.current_earnings_stats.posts_number
   %td.center
-    = previous ? user.previous_earnings_stats.wordpress_posts_number : user.current_earnings_stats.wordpress_posts_number
+    = previous ? user.previous_earnings_stats.news_number : user.current_earnings_stats.news_number
   %td.center
-    = previous ? user.previous_earnings_stats.average_earnings_per_wordpress_post : user.current_earnings_stats.average_earnings_per_wordpress_post
-    $
+    = previous ? user.previous_earnings_stats.lists_number : user.current_earnings_stats.lists_number
   %td.center
-    = previous ? user.previous_earnings_stats.earnings : user.current_earnings_stats.earnings
+    = previous ? user.previous_earnings_stats.news_earnings : user.current_earnings_stats.news_earnings
+  %td.center
+    = previous ? user.previous_earnings_stats.lists_earnings : user.current_earnings_stats.lists_earnings
+  %td.center
+    = previous ? user.previous_earnings_stats.total_earnings : user.current_earnings_stats.total_earnings
     $

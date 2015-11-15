@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105203352) do
+ActiveRecord::Schema.define(version: 20151115103052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20151105203352) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "facebook_email",          default: "",    null: false
+    t.string   "facebook_email",           default: "",    null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "profile_image_url"
@@ -56,11 +56,16 @@ ActiveRecord::Schema.define(version: 20151105203352) do
     t.string   "provider"
     t.string   "uid"
     t.datetime "access_token_expires_at"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.boolean  "admin",                   default: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.boolean  "admin",                    default: false
     t.string   "wordpress_user_id"
-    t.boolean  "active",                  default: true
+    t.boolean  "active",                   default: true
+    t.integer  "base_page_views_per_list"
+    t.integer  "price_per_list"
+    t.integer  "price_per_news"
+    t.integer  "above_base_price"
+    t.integer  "bellow_base_price"
   end
 
   add_index "users", ["facebook_email"], name: "index_users_on_facebook_email", unique: true, using: :btree
@@ -78,6 +83,8 @@ ActiveRecord::Schema.define(version: 20151105203352) do
     t.integer  "average_time_on_page",   default: 0
     t.integer  "users",                  default: 0
     t.float    "page_views_per_user",    default: 0.0
+    t.boolean  "list",                   default: false
+    t.integer  "earnings",               default: 0
   end
 
 end

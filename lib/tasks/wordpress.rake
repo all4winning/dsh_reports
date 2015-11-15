@@ -18,4 +18,12 @@ namespace :wordpress do
     end
   end
 
+  desc "Update earnings"
+  task update_earnings: :environment do
+    WordpressPost.find_each do |post|
+      post.calculate_earnings
+      post.save
+    end
+  end
+
 end

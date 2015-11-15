@@ -18,6 +18,7 @@ module Dsh
       @post.users = users
       @post.page_views_per_session = @post.sessions > 0 ? (@post.unique_page_views / @post.sessions.to_f).round(2) : 0
       @post.page_views_per_user = @post.users > 0 ? (@post.unique_page_views / @post.users.to_f).round(2) : 0
+      @post.calculate_earnings
       @post.save
       puts "Updated wordpress post with id: " + @post.wordpress_id.to_s
     end

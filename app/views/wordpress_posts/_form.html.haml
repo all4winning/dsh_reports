@@ -31,6 +31,10 @@
     .col-sm-6
       = f.collection_select :order, ["Desc", "Asc"], :downcase, :to_s, selected: params[:order]
 
+  .row
+    .col-sm-6
+      = f.collection_select :post_type, ["", "list", "news"], :to_s, :capitalize, selected: params[:post_type]
+
   .row.text-center
     = f.submit "Filter", class: "btn btn-primary"
 %br

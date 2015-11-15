@@ -1,6 +1,6 @@
 class WordpressPostsController < ApplicationController
 
-   SORT_FIELDS = ActiveSupport::HashWithIndifferentAccess.new({:"Created"=> "created_time", :"Users"=> "users", :"Page Views"=> "unique_page_views", :"Page Views Per User"=> "page_views_per_user", :"Average Time On Page"=> "average_time_on_page"})
+  SORT_FIELDS = ActiveSupport::HashWithIndifferentAccess.new({:"Created"=> "created_time", :"Users"=> "users", :"Page Views"=> "unique_page_views", :"Page Views Per User"=> "page_views_per_user", :"Average Time On Page"=> "average_time_on_page"})
 
   before_filter :authenticate_user!
 
@@ -14,6 +14,10 @@ class WordpressPostsController < ApplicationController
   private
 
   def apply_filters(wordpress_posts)
+    if params[:post_type].present?
+      wordpress_posts = params[:post_type] == "list" ? wordpress_posts.lists : wordpress_posts.news
+    end
+
     if params[:title].present?
       wordpress_posts = wordpress_posts.where("lower(title) LIKE :title", title: "%#{params[:title].downcase}%")
     end

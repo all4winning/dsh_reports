@@ -21,3 +21,9 @@
   %td.center
     - if wordpress_post.facebook_posts.count > 0
       = I18n.l(wordpress_post.facebook_posts.first.created_time)
+  %td.center
+    - if wordpress_post.user == current_user || current_user.admin?
+      = wordpress_post.earnings
+      $
+    - else
+      private  
