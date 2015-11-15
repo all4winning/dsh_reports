@@ -4,11 +4,13 @@
 = render "form"
 
 - if @user.present?
+  %h2
+    = I18n.l(Date.new(Date.current.year, params[:month].to_i, 1), format: :full_month)
+    Stats
   .panel.panel-default
   .panel-heading
     %h3
-      = I18n.l(Date.new(Date.current.year, params[:month].to_i, 1), format: :full_month)
-      Stats
+      Wordpress Stats
   .panel-body
     .dataTable_wrapper
       %table#dataTables-example.table.table-striped.table-bordered.table-hover
@@ -33,3 +35,63 @@
               = @user.wordpress_stats(Date.new(Date.current.year, params[:month].to_i, 1)).average_time_on_page
               seconds
 
+  .panel.panel-default
+  .panel-heading
+    %h3
+      Facebook Stats
+  .panel-body
+    .dataTable_wrapper
+      %table#dataTables-example.table.table-striped.table-bordered.table-hover
+        %thead
+          %tr
+            %th Name
+            %th Impressions
+            %th Organic Impressions
+            %th Paid Impressions
+            %th Clicks
+        %tbody
+          %tr{class: table_row_parity(1)}
+            %td.center
+              = @user.name
+            %td.center
+              = @user.facebook_stats(Date.new(Date.current.year, params[:month].to_i, 1)).impressions
+            %td.center
+              = @user.facebook_stats(Date.new(Date.current.year, params[:month].to_i, 1)).impressions_organic
+            %td.center
+              = @user.facebook_stats(Date.new(Date.current.year, params[:month].to_i, 1)).impressions_paid
+            %td.center
+              = @user.facebook_stats(Date.new(Date.current.year, params[:month].to_i, 1)).clicks
+
+  .panel.panel-default
+  .panel-heading
+    %h3
+      Earnings Stats
+  .panel-body
+    .dataTable_wrapper
+      %table#dataTables-example.table.table-striped.table-bordered.table-hover
+        %thead
+          %tr
+            %th Name
+            %th Posts Number
+            %th News Number
+            %th Lists Number
+            %th News Earnings
+            %th Lists Earnings
+            %th Total Earnings
+        %tbody
+          %tr{class: table_row_parity(1)}
+            %td.center
+              = @user.name
+            %td.center
+              = @user.earnings_stats(Date.new(Date.current.year, params[:month].to_i, 1)).posts_number
+            %td.center
+              = @user.earnings_stats(Date.new(Date.current.year, params[:month].to_i, 1)).news_number
+            %td.center
+              = @user.earnings_stats(Date.new(Date.current.year, params[:month].to_i, 1)).lists_number
+            %td.center
+              = @user.earnings_stats(Date.new(Date.current.year, params[:month].to_i, 1)).news_earnings
+            %td.center
+              = @user.earnings_stats(Date.new(Date.current.year, params[:month].to_i, 1)).lists_earnings
+            %td.center
+              = @user.earnings_stats(Date.new(Date.current.year, params[:month].to_i, 1)).total_earnings
+              $

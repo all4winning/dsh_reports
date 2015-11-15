@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
     @previous_facebook_stats ||= Statistics::Facebook.new(self, previous_month.beginning_of_month.beginning_of_day, previous_month.end_of_month.end_of_day)
   end
 
+  def facebook_stats(date)
+    Statistics::Facebook.new(self, date.beginning_of_month.beginning_of_day, date.end_of_month.end_of_day)
+  end
+
   def current_wordpress_stats
     @current_wordpress_stats ||= Statistics::Wordpress.new(self)
   end
@@ -65,5 +69,9 @@ class User < ActiveRecord::Base
   def previous_earnings_stats
     previous_month = Date.current - 1.month
     @previous_earnings_stats ||= Statistics::Earnings.new(self, previous_month.beginning_of_month.beginning_of_day, previous_month.end_of_month.end_of_day)
+  end
+
+  def earnings_stats(date)
+    Statistics::Earnings.new(self, date.beginning_of_month.beginning_of_day, date.end_of_month.end_of_day)
   end
 end
