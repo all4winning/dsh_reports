@@ -1,4 +1,8 @@
 = content_for :page_title do
   Edit User
 
+= link_to update_earnings_user_path(@user), class: 'btn btn-primary' do
+  Update Earnings
+%br
+%br
 = render partial: "form"

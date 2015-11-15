@@ -5,6 +5,7 @@ class WordpressPost < ActiveRecord::Base
 
   scope :lists, -> { where(list: true) }
   scope :news, -> { where(list: false) }
+  scope :by_wordpress_user_id, -> wordpress_user_id { where(wordpress_user_id: wordpress_user_id) }
   
   def self.recent
     if Time.current.mday > 10
@@ -21,6 +22,6 @@ class WordpressPost < ActiveRecord::Base
   private
 
   def earnings_calculator
-    @earnings_calculator ||= Dsh::EarningsCalculator.new(self, user)
+    Dsh::EarningsCalculator.new(self, user)
   end
 end

@@ -45,6 +45,15 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def update_earnings
+    WordpressPost.by_wordpress_user_id(@user.wordpress_user_id).each do |post|
+      post.calculate_earnings
+      post.save
+    end
+    flash[:success] = 'Earnings updated!'
+    redirect_to users_path
+  end
+
   private
 
   def find_user

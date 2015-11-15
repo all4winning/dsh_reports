@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :login_as
+      get :update_earnings
     end
   end
   resources :facebook_posts, only: [:index]

@@ -8,3 +8,5 @@
       %i.fa.fa-pencil-square-o
     = link_to user_path(user), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure you want to delete #{user.name}?", ok: "Delete", cancel: "Cancel" }, alt: 'Delete' do
       %i.fa.fa-times
+    = link_to update_earnings_user_path(user), class: 'btn btn-primary' do
+      Update Earnings
