@@ -5,55 +5,32 @@ module Dsh
     end
 
     def perform
-      update_post_insights if wordpress_post_insights.present?
+      analytics_searcher.wordpress_post_insights
+      update_post_insights
     end
 
     private
 
     def update_post_insights
-      @post.sessions = sessions
-      @post.page_views = page_views
-      @post.unique_page_views = unique_page_views
-      @post.average_time_on_page = average_time_on_page
-      @post.users = users
-      @post.page_views_per_session = @post.sessions > 0 ? (@post.unique_page_views / @post.sessions.to_f).round(2) : 0
-      @post.page_views_per_user = @post.users > 0 ? (@post.unique_page_views / @post.users.to_f).round(2) : 0
-      @post.list = @post.page_views_per_user >= 3
+      @post.sessions = analytics_searcher.sessions
+      @post.page_views = analytics_searcher.page_views
+      @post.unique_page_views = analytics_searcher.unique_page_views
+      @post.average_time_on_page = analytics_searcher.average_time_on_page
+      @post.users = analytics_searcher.users
+      @post.page_views_per_session = analytics_searcher.page_views_per_session
+      @post.page_views_per_user = analytics_searcher.page_views_per_user
+      @post.list = list?
       @post.calculate_earnings
       @post.save
       puts "Updated wordpress post with id: " + @post.wordpress_id.to_s
     end
 
-    def wordpress_post_insights
-      @wordpress_post_insights ||= analytics.query(@post.wordpress_id)
+    def analytics_searcher
+      @analytics_searcher ||= Dsh::AnalyticsSearcher.new(post: @post)
     end
 
-    def analytics
-      @analytics ||= Analytics.new
-    end
-
-    def sessions
-      wordpress_post_insights[0]
-    end
-
-    def page_views
-      wordpress_post_insights[1]
-    end
-
-    def unique_page_views
-      wordpress_post_insights[2]
-    end
-
-    def page_views_per_session
-      wordpress_post_insights[3]
-    end
-
-    def average_time_on_page
-      wordpress_post_insights[4]
-    end
-
-    def users
-      wordpress_post_insights[5]
+    def list?
+      analytics_searcher.page_views_per_user >= 3
     end
   end
 end

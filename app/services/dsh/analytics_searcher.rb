@@ -1,8 +1,8 @@
 module Dsh
   class AnalyticsSearcher
-    def initialize(start_date:, end_date:, post:)
-      @start_date = start_date
-      @end_date = end_date
+    def initialize(post:, start_date: nil, end_date: nil)
+      @start_date = start_date || post.created_time.to_date
+      @end_date = end_date || Date.today
       @post = post
     end
 
