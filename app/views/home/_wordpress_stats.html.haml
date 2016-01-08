@@ -1,10 +1,11 @@
 %tr{class: table_row_parity(user_counter)}
   %td.center
     = user.name
-  %td.center
-    = previous ? user.previous_wordpress_stats.users : user.current_wordpress_stats.users
-  %td.center
-    = previous ? user.previous_wordpress_stats.unique_page_views : user.current_wordpress_stats.unique_page_views
+  - if @current_user.admin?
+    %td.center
+      = previous ? user.previous_wordpress_stats.users : user.current_wordpress_stats.users
+    %td.center
+      = previous ? user.previous_wordpress_stats.unique_page_views : user.current_wordpress_stats.unique_page_views
   %td.center
     = previous ? user.previous_wordpress_stats.page_views_per_user : user.current_wordpress_stats.page_views_per_user
   %td.center

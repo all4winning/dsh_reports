@@ -7,10 +7,11 @@
       = wordpress_post.user.try(:name)
   %td.center
     = I18n.l(wordpress_post.created_time)
-  %td.center
-    = wordpress_post.users
-  %td.center
-    = wordpress_post.unique_page_views
+  - if @current_user.admin?
+    %td.center
+      = wordpress_post.users
+    %td.center
+      = wordpress_post.unique_page_views
   %td.center
     = wordpress_post.page_views_per_user
   %td.center
@@ -26,4 +27,4 @@
       = wordpress_post.earnings
       $
     - else
-      private  
+      private

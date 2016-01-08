@@ -15,8 +15,9 @@
             - if @current_user.admin?
               %th Author
             %th Date
-            %th Users
-            %th Page Views
+            - if @current_user.admin?
+              %th Users
+              %th Page Views
             %th Page Views Per User
             %th Average Time On Page
             %th Facebook Posts
