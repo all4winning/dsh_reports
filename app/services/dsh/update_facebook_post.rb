@@ -39,7 +39,10 @@ module Dsh
     end
 
     def metric_value(metric_name)
-      facebook_post_insights.select { |metric| metric["name"] == metric_name }.first["values"].first["value"]
+      metric = facebook_post_insights.select { |metric| metric.fetch("name", nil) == metric_name }
+      return 0 unless metric.present?
+      
+      metric.first["values"].first["value"]
     end
   end
 end
